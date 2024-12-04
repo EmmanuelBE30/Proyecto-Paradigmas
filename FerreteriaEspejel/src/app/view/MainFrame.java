@@ -43,7 +43,7 @@ public class MainFrame extends javax.swing.JFrame {
         jMenu4.setText("Proveedores");
         jMenu1.add(jMenu4);
 
-        jMenu5.setText("jMenu5");
+        jMenu5.setText("Productos");
         jMenu1.add(jMenu5);
 
         jMenuBar1.add(jMenu1);

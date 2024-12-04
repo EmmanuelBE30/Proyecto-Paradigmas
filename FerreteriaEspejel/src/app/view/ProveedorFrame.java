@@ -180,6 +180,11 @@ public class ProveedorFrame extends javax.swing.JFrame {
         });
 
         btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setText("Eliminar");
 
@@ -281,6 +286,16 @@ public class ProveedorFrame extends javax.swing.JFrame {
                 txtTelefonoProv.getText(), txtEmailProv.getText(), JcomboCat.getSelectedItem().toString());
         proveedor.guardarProveedor(prov);
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        // TODO add your handling code here:
+        Proveedor prov = new Proveedor(txtNombreProv.getText(), txtCalleProv.getText(),
+                txtColoniaProv.getText(), Integer.parseInt(txtCpProv.getText()), 
+                txtCiudadProv.getText(), jComboPaises.getSelectedItem().toString(), 
+                txtTelefonoProv.getText(), txtEmailProv.getText(), JcomboCat.getSelectedItem().toString());
+        proveedor.actualizarProveedor(proveedor, Integer.parseInt(txtId.getText()));
+        
+    }//GEN-LAST:event_btnModificarActionPerformed
 
     /**
      * @param args the command line arguments

@@ -88,15 +88,18 @@ public class ProveedorDaoImp implements ProveedorDao{
             ps.setInt(10, id); // Aquí pasamos el ID del proveedor a actualizar
 
             // Ejecutar la consulta
-            int rowsAffected = ps.executeUpdate();
+            ResultSet generatedKeys = ps.getGeneratedKeys();
 
             // Verificar si se actualizó algún registro
-            if (rowsAffected > 0) {
-                JOptionPane.showMessageDialog(null, "Proveedor actualizado con éxito.");
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontró un proveedor con ese ID.");
-            }
+           int idProveedor = 0;
 
+            if (generatedKeys.next()) {
+                idProveedor = generatedKeys.getInt(1);
+                JOptionPane.showMessageDialog(null, "El proveedor se actualizo con éxito. ID: " + idProveedor);
+            } else {
+                // Si no se genera un ID, mostrar un mensaje de error
+                JOptionPane.showMessageDialog(null, "Error al actualizar proveedor");
+            }
         } catch (SQLException e) {
             // Manejo de excepciones SQL
             System.out.println("Error al actualizar proveedor: " + e);
@@ -107,7 +110,30 @@ public class ProveedorDaoImp implements ProveedorDao{
 
     @Override
     public void eliminarProveedor(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+         try {
+            Connection con = Conexion.getConexion();
+            String query = "DELETE FROM proveedores WHERE id_proveedor = ?";
+            PreparedStatement ps = con.prepareStatement(query);
+
+            // Establecer el parámetro de la consulta (ID del producto a eliminar)
+            ps.setInt(1, id);
+
+            // Ejecutar la consulta
+            ResultSet generatedKeys = ps.getGeneratedKeys();
+            int idProveedor = 0;
+
+            if (generatedKeys.next()) {
+                idProveedor = generatedKeys.getInt(1);
+                JOptionPane.showMessageDialog(null, "El proveedor se elimino con éxito. ID: " + idProveedor);
+            } else {
+                // Si no se genera un ID, mostrar un mensaje de error
+                JOptionPane.showMessageDialog(null, "Error al eliminar proveedor");
+            }
+
+        } catch (SQLException e) {
+            // Manejo de excepciones SQL
+            System.out.println("Error al eliminar proveedor: " + e);
+        }
     }
 
     @Override
