@@ -19,8 +19,14 @@ public class Proveedor {
     private String telefonoProveedor;
     private String emailProveedor;
     private String categoriaProveedor;
-    
-            
+
+    public Proveedor(String nombreProveedor) {
+        this.nombreProveedor = nombreProveedor;
+    }
+
+    public Proveedor() {
+    }
+         
 
     public String getNombreProveedor() {
         return nombreProveedor;

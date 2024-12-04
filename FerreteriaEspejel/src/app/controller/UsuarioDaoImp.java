@@ -5,7 +5,7 @@
 package app.controller;
 
 import app.model.Usuario;
-import app.utils.conexion;
+import app.utils.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,7 +21,7 @@ public class UsuarioDaoImp implements UsuarioDao {
     public  Usuario validarUsuario(String login, String password) {
        Usuario usuario = null;
        try{
-                     Connection conn = conexion.getConexion();                                  
+                     Connection conn = Conexion.getConexion();                                  
             //Recuperar los datosde mis tablas
              String query= "select * from usuarios u, personas p where p.id_persona = u.id_persona and usuario =? and contraseña =?";
              PreparedStatement ps = conn.prepareStatement(query);
