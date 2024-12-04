@@ -4,6 +4,9 @@
  */
 package app.view;
 
+import app.controller.ProveedorDaoImp;
+import app.model.Proveedor;
+
 /**
  *
  * @author Vanesa
@@ -13,6 +16,7 @@ public class ProveedorFrame extends javax.swing.JFrame {
     /**
      * Creates new form ProveedorFrame
      */
+    private ProveedorDaoImp proveedor = new ProveedorDaoImp();
     public ProveedorFrame() {
         initComponents();
     }
@@ -44,7 +48,7 @@ public class ProveedorFrame extends javax.swing.JFrame {
         txtTelefonoProv = new javax.swing.JTextField();
         txtEmailProv = new javax.swing.JTextField();
         jComboPaises = new javax.swing.JComboBox<>();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        JcomboCat = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         btnGuardar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
@@ -77,7 +81,7 @@ public class ProveedorFrame extends javax.swing.JFrame {
 
         jComboPaises.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "México", "Colombia", "Estados Unidos", "Venezuela", "Canada", "Alemania" }));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Herramientas manuales", "Herramientas eléctricas", "Materiales de construcción", "Materiales adhesivos", "Materiales de fontanería", "Materiales electricos", "Jardinería" }));
+        JcomboCat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Herramientas manuales", "Herramientas eléctricas", "Materiales de construcción", "Materiales adhesivos", "Materiales de fontanería", "Materiales electricos", "Jardinería" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -112,7 +116,7 @@ public class ProveedorFrame extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JcomboCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel7)
@@ -153,9 +157,7 @@ public class ProveedorFrame extends javax.swing.JFrame {
                     .addComponent(jComboPaises, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel7))
+                    .addComponent(jLabel7)
                     .addComponent(txtTelefonoProv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -164,13 +166,18 @@ public class ProveedorFrame extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JcomboCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Acciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Rockwell", 0, 14))); // NOI18N
 
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         btnModificar.setText("Modificar");
 
@@ -267,6 +274,14 @@ public class ProveedorFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        Proveedor prov = new Proveedor(txtNombreProv.getText(), txtCalleProv.getText(),
+                txtColoniaProv.getText(), Integer.parseInt(txtCpProv.getText()), 
+                txtCiudadProv.getText(), jComboPaises.getSelectedItem().toString(), 
+                txtTelefonoProv.getText(), txtEmailProv.getText(), JcomboCat.getSelectedItem().toString());
+        proveedor.guardarProveedor(prov);
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -303,12 +318,12 @@ public class ProveedorFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> JcomboCat;
     private javax.swing.JTable TablaProveedor;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnModificar;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboPaises;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -24,6 +24,18 @@ public class Proveedor {
         this.nombreProveedor = nombreProveedor;
     }
 
+    public Proveedor(String nombreProveedor, String calleProveedor, String coloniaProveedor, int cpProveedor, String ciudadProveedor, String paisProveedor, String telefonoProveedor, String emailProveedor, String categoriaProveedor) {
+        this.nombreProveedor = nombreProveedor;
+        this.calleProveedor = calleProveedor;
+        this.coloniaProveedor = coloniaProveedor;
+        this.cpProveedor = cpProveedor;
+        this.ciudadProveedor = ciudadProveedor;
+        this.paisProveedor = paisProveedor;
+        this.telefonoProveedor = telefonoProveedor;
+        this.emailProveedor = emailProveedor;
+        this.categoriaProveedor = categoriaProveedor;
+    }
+
     public Proveedor() {
     }
          
