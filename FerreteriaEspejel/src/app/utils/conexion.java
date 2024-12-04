@@ -22,7 +22,7 @@ public class conexion {
         
         String url = "jdbc:mysql://localhost:3306/ferreteria_espejel";
         try{
-        Connection conn = DriverManager.getConnection(url,"root","12345678");
+        Connection conn = DriverManager.getConnection(url,"root","lpoo1234@");
         return conn;
         }catch(SQLException e){
                 System.out.println("Error de conexion "+e.toString());
