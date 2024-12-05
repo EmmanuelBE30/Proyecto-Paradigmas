@@ -76,7 +76,7 @@ public class ProductoDaoImp implements ProductoDao {
                          + "costo_proveedor = ?, "
                          + "garantia = ?, "
                          + "categoria = ?, "
-                         + "id_proveedor = ?, "
+                         + "id_proveedor = ? "
                          + "WHERE id_producto = ?";
 
             // Preparar la consulta de actualización
@@ -92,26 +92,60 @@ public class ProductoDaoImp implements ProductoDao {
             ps.setInt(9, id); // Aquí pasamos el ID del producto a actualizar
 
             // Ejecutar la consulta
-            ResultSet generatedKeys = ps.getGeneratedKeys();
-            int idProducto = 0;
-
-            if (generatedKeys.next()) {
-                idProducto = generatedKeys.getInt(1);
-                JOptionPane.showMessageDialog(null, "El producto se actualizo con éxito. ID: " + idProducto);
-            } else {
-                // Si no se genera un ID, mostrar un mensaje de error
-                JOptionPane.showMessageDialog(null, "Error al actualizar producto");
-            }
-
-        } catch (SQLException e) {
+             ps.executeUpdate();
+           JOptionPane.showMessageDialog(null, "El producto se actualizo exitósamente ");
+           } catch (SQLException e) {
             // Manejo de excepciones SQL
             System.out.println("Error al actualizar producto: " + e);
         }
       }
 
+        
+
     @Override
     public Producto consultarProducto(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+         try {
+    // Obtener la conexión a la base de datos
+    Connection con = Conexion.getConexion();
+
+    // Consulta SQL para buscar un proveedor por ID
+    String query = "SELECT id_producto, nombre, descripcion, cantidad, costo_publico, costo_proveedor, garantia, categoria, id_proveedor, "
+             + "(SELECT nombre FROM proveedores WHERE id_proveedor = productos.id_proveedor) AS nombre_proveedor "
+             + "FROM productos "
+             + "WHERE id_producto = ?";
+    
+    // Preparar la consulta de selección
+    PreparedStatement ps = con.prepareStatement(query);
+    ps.setInt(1, id); // Pasar el ID del proveedor a consultar
+
+    // Ejecutar la consulta
+    ResultSet rs = ps.executeQuery();
+
+    // Verificar si hay resultados
+    if (rs.next()) {
+        // Obtener los datos del proveedor desde el ResultSet
+        String nombre = rs.getString("nombre");
+        String descripcion = rs.getString("descripcion");
+        int cantidad = rs.getInt("cantidad");
+        int costoPublico = rs.getInt("costo_publico");
+        int costoProveedor = rs.getInt("costo_proveedor");
+        String garantia = rs.getString("garantia");
+        String categoria = rs.getString("categoria");
+        String ProvedorProd  = rs.getString("id_proveedor");
+
+        // Mostrar los datos en un mensaje o asignarlos a los componentes gráficos
+        return new Producto(nombre, descripcion, cantidad, costoPublico, costoProveedor, garantia,categoria,ProvedorProd);
+    } else {
+        // Si no se encuentra el proveedor, mostrar un mensaje
+        JOptionPane.showMessageDialog(null, "No se encontró el proveedor con el ID especificado.");
+    }
+} catch (SQLException e) {
+    // Manejo de excepciones SQL
+    System.out.println("Error al consultar proveedor: " + e);
+    JOptionPane.showMessageDialog(null, "Ocurrió un error al consultar el proveedor.");
+}
+        return null;
+        
     }
 
     @Override
@@ -125,17 +159,10 @@ public class ProductoDaoImp implements ProductoDao {
             ps.setInt(1, id);
 
             // Ejecutar la consulta
-            ResultSet generatedKeys = ps.getGeneratedKeys();
-            int idProducto = 0;
-
-            if (generatedKeys.next()) {
-                idProducto = generatedKeys.getInt(1);
-                JOptionPane.showMessageDialog(null, "El producto se elimino con éxito. ID: " + idProducto);
-            } else {
-                // Si no se genera un ID, mostrar un mensaje de error
-                JOptionPane.showMessageDialog(null, "Error al eliminar producto");
-            }
-
+           ps.executeUpdate();// Ejecutar la consulta
+            
+            JOptionPane.showMessageDialog(null, "El EMPLEADO se elimino exitósamente");
+            
         } catch (SQLException e) {
             // Manejo de excepciones SQL
             System.out.println("Error al eliminar producto: " + e);
@@ -146,10 +173,10 @@ public class ProductoDaoImp implements ProductoDao {
     public void construirTabla(DefaultTableModel modeloTabla) {
         try{
             Connection conn = Conexion.getConexion();
-            String query = "SELECT  p.id_producto,p.nombre AS producto_nombre, p.descripcion, p.cantidad, p.costo_publico, p.costo_proveedor, p.garantia, p.categoria, pr.id_proveedor\n" +
-"  FROM  productos p  \n" +
+            String query = "SELECT p.id_producto,p.nombre AS producto_nombre, p.descripcion, p.cantidad, p.costo_publico, p.costo_proveedor, p.garantia, p.categoria, pr.nombre AS proveedor_nombre\n" +
+"FROM productos p\n" +
 "JOIN proveedores pr \n" +
-" ON     p.id_proveedor = pr.id_proveedor;";
+"ON p.id_proveedor = pr.id_proveedor";
             PreparedStatement ps=conn.prepareStatement(query);
             ResultSet rs= ps.executeQuery();
             
