@@ -285,7 +285,7 @@ public class ProductoFrame extends javax.swing.JFrame {
 
     private void btnGuardarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarProdActionPerformed
         Producto prod = new Producto(txtNombreProd.getText(), txtDescripcionProd.getText(),
-                jComboCantidad.getSelectedItem().toString(), Integer.parseInt(txtCostoPubProd.getText()),
+                jComboCantidad.setValue(.getText()), Integer.parseInt(txtCostoPubProd.getText()),
                 Integer.parseInt(txtCostoProvProd.getText()), txtGarantiaProd.getText(),
                 jComboProveedor.getSelectedItem().toString(), jComboCat.getSelectedItem().toString());
 

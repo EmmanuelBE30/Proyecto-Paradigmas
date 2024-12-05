@@ -11,7 +11,7 @@ package app.model;
 public class Factura {
     private String sucursal;
     private String fechaEmisionFactura;
-    private String producto;
+    private String productoFac;
     private int totalFactura;
     private String estadoFactura;
     private String formaPago;
@@ -19,10 +19,10 @@ public class Factura {
     private String categoria;
     private String clienteFactura;
 
-    public Factura(String sucursal, String fechaEmisionFactura, String producto, int totalFactura, String estadoFactura, String formaPago, String descripcionFactura, String categoria, String clienteFactura) {
+    public Factura(String sucursal, String fechaEmisionFactura, String productoFac, int totalFactura, String estadoFactura, String formaPago, String descripcionFactura, String categoria, String clienteFactura) {
         this.sucursal = sucursal;
         this.fechaEmisionFactura = fechaEmisionFactura;
-        this.producto = producto;
+        this.productoFac = productoFac;
         this.totalFactura = totalFactura;
         this.estadoFactura = estadoFactura;
         this.formaPago = formaPago;
@@ -47,12 +47,12 @@ public class Factura {
         this.fechaEmisionFactura = fechaEmisionFactura;
     }
 
-    public String getProducto() {
-        return producto;
+    public String getProductoFac() {
+        return productoFac;
     }
 
     public void setProducto(String producto) {
-        this.producto = producto;
+        this.productoFac = producto;
     }
 
     public int getTotalFactura() {

@@ -322,6 +322,18 @@ public class ProveedorFrame extends javax.swing.JFrame {
 
     private void TablaProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaProveedorMouseClicked
         // TODO add your handling code here:
+        System.out.println("Seleccionar registro");
+        int fila = TablaProveedor.getSelectedRow();
+        int id  = Integer.parseInt(TablaProveedor.getValueAt(fila, 0).toString());
+        
+       proveedor.consultarProveedor(id);
+       
+       txtId.setText(String.valueOf(id));
+       //Datos para llenar el formulario
+       txtNombreProv.setText(proveedor.getNombreProveedor());
+       
+      
+        
     }//GEN-LAST:event_TablaProveedorMouseClicked
 
     /**
