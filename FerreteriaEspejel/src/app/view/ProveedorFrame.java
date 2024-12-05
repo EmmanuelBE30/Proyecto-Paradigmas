@@ -49,6 +49,7 @@ public class ProveedorFrame extends javax.swing.JFrame {
         txtEmailProv = new javax.swing.JTextField();
         jComboPaises = new javax.swing.JComboBox<>();
         JcomboCat = new javax.swing.JComboBox<>();
+        txtId = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         btnGuardar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
@@ -99,15 +100,18 @@ public class ProveedorFrame extends javax.swing.JFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(12, 12, 12)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNombreProv, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtCalleProv, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtColoniaProv, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtCiudadProv)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addComponent(jComboPaises, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(txtNombreProv, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtCalleProv, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtColoniaProv, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtCpProv, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtCiudadProv)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtCpProv, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -145,8 +149,10 @@ public class ProveedorFrame extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel3))
                                     .addComponent(txtColoniaProv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(txtId, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(txtCpProv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel5))
@@ -187,6 +193,11 @@ public class ProveedorFrame extends javax.swing.JFrame {
         });
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         btnLimpiar.setText("Limpiar");
 
@@ -236,6 +247,11 @@ public class ProveedorFrame extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        TablaProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaProveedorMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(TablaProveedor);
@@ -293,9 +309,20 @@ public class ProveedorFrame extends javax.swing.JFrame {
                 txtColoniaProv.getText(), Integer.parseInt(txtCpProv.getText()), 
                 txtCiudadProv.getText(), jComboPaises.getSelectedItem().toString(), 
                 txtTelefonoProv.getText(), txtEmailProv.getText(), JcomboCat.getSelectedItem().toString());
-        proveedor.actualizarProveedor(proveedor, Integer.parseInt(txtId.getText()));
+        proveedor.actualizarProveedor(prov, Integer.parseInt(txtId.getText()));
         
     }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        int id = Integer.parseInt(txtId.getText());
+
+        proveedor.eliminarProveedor(id);
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void TablaProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaProveedorMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TablaProveedorMouseClicked
 
     /**
      * @param args the command line arguments
@@ -357,6 +384,7 @@ public class ProveedorFrame extends javax.swing.JFrame {
     private javax.swing.JTextField txtColoniaProv;
     private javax.swing.JTextField txtCpProv;
     private javax.swing.JTextField txtEmailProv;
+    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNombreProv;
     private javax.swing.JTextField txtTelefonoProv;
     // End of variables declaration//GEN-END:variables

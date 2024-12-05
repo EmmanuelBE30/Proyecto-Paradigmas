@@ -143,6 +143,57 @@ public class ProveedorDaoImp implements ProveedorDao{
 
     @Override
     public Proveedor consultarProveedor(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }   
+        try {
+    // Obtener la conexión a la base de datos
+    Connection con = Conexion.getConexion();
+
+    // Consulta SQL para buscar un proveedor por ID
+    String query = "SELECT * FROM proveedores WHERE id_proveedor = ?";
+    
+    // Preparar la consulta de selección
+    PreparedStatement ps = con.prepareStatement(query);
+    ps.setInt(1, id); // Pasar el ID del proveedor a consultar
+
+    // Ejecutar la consulta
+    ResultSet rs = ps.executeQuery();
+
+    // Verificar si hay resultados
+    if (rs.next()) {
+        // Obtener los datos del proveedor desde el ResultSet
+        String nombre = rs.getString("nombre");
+        String calle = rs.getString("calle");
+        String colonia = rs.getString("colonia");
+        int cp = rs.getInt("CP");
+        String ciudad = rs.getString("ciudad");
+        String pais = rs.getString("pais");
+        String telefono = rs.getString("telefono");
+        String email = rs.getString("email");
+        String categoria = rs.getString("categoria");
+
+        // Mostrar los datos en un mensaje o asignarlos a los componentes gráficos
+        JOptionPane.showMessageDialog(null, 
+            "Datos del Proveedor:\n" +
+            "Nombre: " + nombre + "\n" +
+            "Calle: " + calle + "\n" +
+            "Colonia: " + colonia + "\n" +
+            "CP: " + cp + "\n" +
+            "Ciudad: " + ciudad + "\n" +
+            "País: " + pais + "\n" +
+            "Teléfono: " + telefono + "\n" +
+            "Email: " + email + "\n" +
+            "Categoría: " + categoria
+        );
+    } else {
+        // Si no se encuentra el proveedor, mostrar un mensaje
+        JOptionPane.showMessageDialog(null, "No se encontró el proveedor con el ID especificado.");
+    }
+} catch (SQLException e) {
+    // Manejo de excepciones SQL
+    System.out.println("Error al consultar proveedor: " + e);
+    JOptionPane.showMessageDialog(null, "Ocurrió un error al consultar el proveedor.");
+}
+        return null;
+        
+    } 
+    
 }
