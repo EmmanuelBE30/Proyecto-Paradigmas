@@ -68,16 +68,16 @@ public class ProductoDaoImp implements ProductoDao {
             Connection con = Conexion.getConexion();
 
             // Consulta SQL para actualizar los datos del producto
-            String query = "UPDATE productos SET "
-                         + "nombre = ?, "
-                         + "descripcion = ?, "
-                         + "cantidad = ?, "
-                         + "costo_publico = ?, "
-                         + "costo_proveedor = ?, "
-                         + "garantia = ?, "
-                         + "categoria = ?, "
-                         + "id_proveedor = ? "
-                         + "WHERE id_producto = ?";
+            String query = "UPDATE productos\n"
+                    + "   SET nombre = ?, \n"
+                    + "    descripcion = ?, \n"
+                    + "    cantidad = ?, \n"
+                    + "    costo_publico = ?, \n"
+                    + "    costo_proveedor = ?, \n"
+                    + "    garantia = ?, \n"
+                    + "    categoria = ?, \n"
+                    + "    id_proveedor = (SELECT id_proveedor FROM proveedores WHERE nombre = ?)\n"
+                    + "WHERE id_producto = ?;";
 
             // Preparar la consulta de actualización
             PreparedStatement ps = con.prepareStatement(query);
@@ -173,10 +173,10 @@ public class ProductoDaoImp implements ProductoDao {
     public void construirTabla(DefaultTableModel modeloTabla) {
         try{
             Connection conn = Conexion.getConexion();
-            String query = "SELECT p.id_producto,p.nombre AS producto_nombre, p.descripcion, p.cantidad, p.costo_publico, p.costo_proveedor, p.garantia, p.categoria, pr.nombre AS proveedor_nombre\n" +
-"FROM productos p\n" +
-"JOIN proveedores pr \n" +
-"ON p.id_proveedor = pr.id_proveedor";
+            String query = "SELECT p.id_producto,p.nombre AS producto_nombre, p.descripcion, p.cantidad, p.costo_publico, p.costo_proveedor, p.garantia, p.categoria, pr.nombre AS proveedor_nombre\n"
+                    + "FROM productos p\n"
+                    + "JOIN proveedores pr \n"
+                    + "ON p.id_proveedor = pr.id_proveedor";
             PreparedStatement ps=conn.prepareStatement(query);
             ResultSet rs= ps.executeQuery();
             

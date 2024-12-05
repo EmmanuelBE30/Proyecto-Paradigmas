@@ -16,10 +16,11 @@ public class Factura {
     private String estadoFactura;
     private String formaPago;
     private String descripcionFactura;
+    private String rfcCli;
     private String categoria;
     private String clienteFactura;
 
-    public Factura(String sucursal, String fechaEmisionFactura, String productoFac, int totalFactura, String estadoFactura, String formaPago, String descripcionFactura, String categoria, String clienteFactura) {
+    public Factura(String sucursal, String fechaEmisionFactura, String productoFac, int totalFactura, String estadoFactura, String formaPago, String descripcionFactura, String rfcCli, String categoria, String clienteFactura) {
         this.sucursal = sucursal;
         this.fechaEmisionFactura = fechaEmisionFactura;
         this.productoFac = productoFac;
@@ -27,6 +28,7 @@ public class Factura {
         this.estadoFactura = estadoFactura;
         this.formaPago = formaPago;
         this.descripcionFactura = descripcionFactura;
+        this.rfcCli = rfcCli;
         this.categoria = categoria;
         this.clienteFactura = clienteFactura;
     }
@@ -51,8 +53,8 @@ public class Factura {
         return productoFac;
     }
 
-    public void setProducto(String producto) {
-        this.productoFac = producto;
+    public void setProductoFac(String productoFac) {
+        this.productoFac = productoFac;
     }
 
     public int getTotalFactura() {
@@ -87,6 +89,14 @@ public class Factura {
         this.descripcionFactura = descripcionFactura;
     }
 
+    public String getRfcCli() {
+        return rfcCli;
+    }
+
+    public void setRfcCli(String rfcCli) {
+        this.rfcCli = rfcCli;
+    }
+
     public String getCategoria() {
         return categoria;
     }
@@ -104,6 +114,9 @@ public class Factura {
     }
     
     
+
     
+    }
+
     
-}
+
