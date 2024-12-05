@@ -160,7 +160,6 @@ public void guardarFactura(Factura factura) {
             String categoria = rs.getString("categoria");
             int idCliente = rs.getInt("id_cliente");
 
-            // Puedes adaptar este campo según cómo lo manejes en tu clase Factura
             String clienteFactura = String.valueOf(idCliente);
 
             // Retornar un nuevo objeto Factura con los datos obtenidos
