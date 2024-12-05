@@ -93,7 +93,7 @@ public class FacturaFrame extends javax.swing.JFrame {
 
         jComboSucursal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Espejel Centro", "Espejel Constructor", "Espejel Jardin", "Espejel Online" }));
 
-        jComboEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pagada", "Vencida", "Anulada", " " }));
+        jComboEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vigente", "Cancelada", " " }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
