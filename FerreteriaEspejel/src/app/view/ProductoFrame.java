@@ -58,7 +58,7 @@ public class ProductoFrame extends javax.swing.JFrame {
         txtDescripcionProd = new javax.swing.JTextField();
         txtNombreProd = new javax.swing.JTextField();
         txtGarantiaProd = new javax.swing.JTextField();
-        jComboCantidad = new javax.swing.JSpinner();
+        jSpinnerCantidad = new javax.swing.JSpinner();
         jComboProveedor = new javax.swing.JComboBox<>();
         jComboCat = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
@@ -89,8 +89,8 @@ public class ProductoFrame extends javax.swing.JFrame {
 
         jLabel8.setText("Categoria");
 
-        jComboCantidad.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 1));
-        jComboCantidad.setEditor(new javax.swing.JSpinner.NumberEditor(jComboCantidad, ""));
+        jSpinnerCantidad.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 1));
+        jSpinnerCantidad.setEditor(new javax.swing.JSpinner.NumberEditor(jSpinnerCantidad, ""));
 
         jComboCat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Herramientas manuales", "Herramientas eléctricas", "Materiales de construcción", "Materiales adhesivos", "Materiales de fontanería", "Materiales electricos", "Jardinería" }));
 
@@ -121,7 +121,7 @@ public class ProductoFrame extends javax.swing.JFrame {
                                     .addComponent(txtDescripcionProd)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(37, 37, 37)
-                                .addComponent(jComboCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jSpinnerCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -153,7 +153,7 @@ public class ProductoFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
-                    .addComponent(jComboCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSpinnerCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4)
@@ -284,8 +284,8 @@ public class ProductoFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarProdActionPerformed
-        Producto prod = new Producto(txtNombreProd.getText(), txtDescripcionProd.getText(),
-                jComboCantidad.getSelectedItem().toString(), Integer.parseInt(txtCostoPubProd.getText()),
+        
+        Producto prod = new Producto(txtNombreProd.getText(), txtDescripcionProd.getText(), (int) jSpinnerCantidad.getValue(), Integer.parseInt(txtCostoPubProd.getText()),
                 Integer.parseInt(txtCostoProvProd.getText()), txtGarantiaProd.getText(),
                 jComboProveedor.getSelectedItem().toString(), jComboCat.getSelectedItem().toString());
 
@@ -356,7 +356,6 @@ public class ProductoFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnGuardarProd;
     private javax.swing.JButton btnLimpiarProd;
     private javax.swing.JButton btnModificarProd;
-    private javax.swing.JSpinner jComboCantidad;
     private javax.swing.JComboBox<String> jComboCat;
     private javax.swing.JComboBox<String> jComboProveedor;
     private javax.swing.JLabel jLabel1;
@@ -370,6 +369,7 @@ public class ProductoFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSpinner jSpinnerCantidad;
     private javax.swing.JTextField txtCostoProvProd;
     private javax.swing.JTextField txtCostoPubProd;
     private javax.swing.JTextField txtDescripcionProd;
