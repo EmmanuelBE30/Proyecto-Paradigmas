@@ -10,6 +10,8 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import app.model.Proveedor;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -185,5 +187,32 @@ public class ProveedorDaoImp implements ProveedorDao{
         return null;
         
     } 
+
+    @Override
+    public Proveedor obtenerIdProveedor(Proveedor nombreProveedor) {
+         try{
+            Connection con = Conexion.getConexion();
+            String query = "select id_proveedor from proveedores where nombre = ?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, nombreProveedor.getNombreProveedor());
+            ResultSet rs = ps.executeQuery();
+            
+            if(rs.next()){
+                nombreProveedor.setId_proveedor(rs.getInt("id_proveedor"));
+              }
+            return nombreProveedor;
+              }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
     
-}
+            
+  }       
+
+            
+           
+            
+        
+    
+

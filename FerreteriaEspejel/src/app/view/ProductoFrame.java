@@ -70,7 +70,12 @@ public class ProductoFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaProductos = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Productos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Rockwell", 0, 14))); // NOI18N
 
@@ -230,17 +235,17 @@ public class ProductoFrame extends javax.swing.JFrame {
 
         TablaProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "Descripcion", "Cantidad", "Costo Publico", "Costo Proveedor", "Garantia", "Proveedor", "Categoria"
+                "Id_producto", "Nombre", "Descripcion", "Cantidad", "Costo Publico", "Costo Proveedor", "Garantia", "Proveedor", "Categoria"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -257,6 +262,7 @@ public class ProductoFrame extends javax.swing.JFrame {
             TablaProductos.getColumnModel().getColumn(5).setResizable(false);
             TablaProductos.getColumnModel().getColumn(6).setResizable(false);
             TablaProductos.getColumnModel().getColumn(7).setResizable(false);
+            TablaProductos.getColumnModel().getColumn(8).setResizable(false);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -317,6 +323,13 @@ public class ProductoFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"solo numeros");
         }
     }//GEN-LAST:event_txtCostoProvProdKeyTyped
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        MainFrame mainFrame = new MainFrame();
+        mainFrame.setVisible(true);
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

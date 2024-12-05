@@ -17,5 +17,6 @@ public interface ProveedorDao {
     public Proveedor consultarProveedor(int id);
     public void eliminarProveedor(int id);
     public void construirTabla(DefaultTableModel modeloTabla);
+    public Proveedor obtenerIdProveedor(Proveedor nombreProveedor);
     
 }

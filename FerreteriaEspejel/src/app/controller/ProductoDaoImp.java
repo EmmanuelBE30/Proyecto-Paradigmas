@@ -9,6 +9,7 @@ import app.utils.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
@@ -140,7 +141,28 @@ public class ProductoDaoImp implements ProductoDao {
 
     @Override
     public void construirTabla(DefaultTableModel modeloTabla) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try{
+            Connection conn = Conexion.getConexion();
+            String query = "SELECT  p.id_producto,p.nombre AS producto_nombre, p.descripcion, p.cantidad, p.costo_publico, p.costo_proveedor, p.garantia, p.categoria, pr.id_proveedor\n" +
+"  FROM  productos p  \n" +
+"JOIN proveedores pr \n" +
+" ON     p.id_proveedor = pr.id_proveedor;";
+            PreparedStatement ps=conn.prepareStatement(query);
+            ResultSet rs= ps.executeQuery();
+            
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columns = rsmd.getColumnCount();
+            
+            while(rs.next()){
+                Object[] fila=new Object[columns];
+                for(int indice=0; indice<columns; indice++){
+                    fila[indice]=rs.getObject(indice + 1);
+                }
+                modeloTabla.addRow(fila);
+            }
+        }catch(SQLException e){
+            System.out.println("Error al construir tabla");
+        }
     }
     
 }
