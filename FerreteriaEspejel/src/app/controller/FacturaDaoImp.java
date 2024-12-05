@@ -73,35 +73,36 @@ public class FacturaDaoImp implements FacturaDao {
             Connection con = Conexion.getConexion();
 
             // Consulta SQL para actualizar los datos del proveedor
-            String query = "UPDATE facturas\n"
-                    + "   SET sucursal = ?, \n"
-                    + "    fecha_emision = ?, \n"
-                    + "    cantidad = ?, \n"
-                    + "    costo_publico = ?, \n"
-                    + "    costo_proveedor = ?, \n"
-                    + "    garantia = ?, \n"
-                    + "    categoria = ?, \n"
-                    + "    id_proveedor = (SELECT id_proveedor FROM proveedores WHERE nombre = ?)\n"
-                    + "WHERE id_producto = ?;";
+            String query = "UPDATE facturas "
+                    + "SET sucursa = ?, "
+                    + "fecha_emision = ?, "
+                    + "producto = ?, "
+                    + "total = ?, "
+                    + "estado = ?, "
+                    + "forma_pago = ?, "
+                    + "descripcion = ?, "
+                    + "categoria = ?, "
+                    + "id_cliente = (SELECT id_cliente FROM clientes WHERE nombre = ?) "
+                    + "WHERE id_factura = ?";
 
             // Preparar la consulta de actualización
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1, factura.getNombreProveedor());
-            ps.setString(2, factura.getCalleProveedor());
-            ps.setString(3, factura.getColoniaProveedor());
-            ps.setInt(4, factura.getCpProveedor());
-            ps.setString(5, factura.getCiudadProveedor());
-            ps.setString(6, factura.getPaisProveedor());
-            ps.setString(7, factura.getTelefonoProveedor());
-            ps.setString(8, factura.getEmailProveedor());
-            ps.setString(9, factura.getCategoriaProveedor());
+            ps.setString(1, factura.getSucursal());
+            ps.setString(2, factura.getFechaEmisionFactura());
+            ps.setString(3, factura.getProductoFac());
+            ps.setInt(4, factura.getTotalFactura());
+            ps.setString(5, factura.getEstadoFactura());
+            ps.setString(6, factura.getFormaPago());
+            ps.setString(7, factura.getDescripcionFactura());
+            ps.setString(8, factura.getCategoria());
+            ps.setString(9, factura.getClienteFactura());
             ps.setInt(10, id); // Aquí pasamos el ID del proveedor a actualizar
 
             // Ejecutar la consulta
            ps.executeUpdate();
-           JOptionPane.showMessageDialog(null, "El proveedor se actualizo exitósamente ");
+           JOptionPane.showMessageDialog(null, "La factura se actualizo exitósamente ");
     }catch(SQLException e){
-            System.out.println("Error al actualizar proveedor");
+            System.out.println("Error al actualizar la factura");
     }
         }
     
@@ -152,6 +153,23 @@ public class FacturaDaoImp implements FacturaDao {
 
     @Override
     public void eliminarFactura(int id) {
+        try {
+            Connection con = Conexion.getConexion();
+            String query = "DELETE FROM facturas WHERE id_factura = ?";
+            PreparedStatement ps = con.prepareStatement(query);
+
+            // Establecer el parámetro de la consulta (ID del producto a eliminar)
+            ps.setInt(1, id);
+
+            // Ejecutar la consulta
+           ps.executeUpdate();// Ejecutar la consulta
+            
+            JOptionPane.showMessageDialog(null, "La factura se elimino exitósamente");
+            
+        } catch (SQLException e) {
+            // Manejo de excepciones SQL
+            System.out.println("Error al eliminar la factura: " + e);
+        }
       }
 
     @Override

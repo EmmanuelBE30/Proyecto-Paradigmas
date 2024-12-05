@@ -161,7 +161,7 @@ public class ProductoDaoImp implements ProductoDao {
             // Ejecutar la consulta
            ps.executeUpdate();// Ejecutar la consulta
             
-            JOptionPane.showMessageDialog(null, "El EMPLEADO se elimino exitósamente");
+            JOptionPane.showMessageDialog(null, "El producto se elimino exitósamente");
             
         } catch (SQLException e) {
             // Manejo de excepciones SQL
