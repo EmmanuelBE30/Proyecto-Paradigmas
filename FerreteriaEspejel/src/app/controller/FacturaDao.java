@@ -4,6 +4,7 @@
  */
 package app.controller;
 
+import app.model.Cliente;
 import app.model.Factura;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,5 +18,6 @@ public interface FacturaDao {
     public Factura consultarFactura(int id);
     public void eliminarFactura(int id);
     public void construirTabla(DefaultTableModel modeloTabla);
+    public Cliente obtenerIdCliente(String rfcCliente);
     
 }

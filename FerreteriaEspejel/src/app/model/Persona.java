@@ -24,6 +24,10 @@ public class Persona {
         this.sexo = sexo;
         this.correo = correo;
     }
+     
+     public Persona(){
+         
+     }
 
     public String getRfc() {
         return rfc;
