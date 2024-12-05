@@ -203,10 +203,21 @@ public void guardarFactura(Factura factura) {
     public void construirTabla(DefaultTableModel modeloTabla) {
           try{
             Connection conn = Conexion.getConexion();
-            String query = "SELECT p.id_producto,p.nombre AS producto_nombre, p.descripcion, p.cantidad, p.costo_publico, p.costo_proveedor, p.garantia, p.categoria, pr.nombre AS proveedor_nombre\n"
-                    + "FROM productos p\n"
-                    + "JOIN proveedores pr \n"
-                    + "ON p.id_proveedor = pr.id_proveedor";
+            String query = "SELECT \n" +
+            "    f.id_factura AS \"ID Factura\",\n" +
+            "    f.sucursal AS \"Sucursal\",\n" +
+            "    f.fecha_emision AS \"Fecha de Emisión\",\n" +
+            "    f.producto AS \"Producto\",\n" +
+            "    f.total AS \"Total\",\n" +
+            "    f.estado AS \"Estado\",\n" +
+            "    f.froma_pago AS \"Forma de Pago\",\n" +
+            "    f.descripcion AS \"Descripcion\",\n" +
+            "    f.categoria AS \"Categoría\",\n" +
+            "    c.rfc AS \"RFC\"\n" +
+            "FROM \n" +
+            "    facturas f\n" +
+            "JOIN \n" +
+            "    clientes c ON f.id_cliente = c.id_persona;";
             PreparedStatement ps=conn.prepareStatement(query);
             ResultSet rs= ps.executeQuery();
             
