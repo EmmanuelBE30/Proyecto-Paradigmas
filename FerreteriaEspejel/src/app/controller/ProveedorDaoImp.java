@@ -171,18 +171,7 @@ public class ProveedorDaoImp implements ProveedorDao{
         String categoria = rs.getString("categoria");
 
         // Mostrar los datos en un mensaje o asignarlos a los componentes gráficos
-        JOptionPane.showMessageDialog(null, 
-            "Datos del Proveedor:\n" +
-            "Nombre: " + nombre + "\n" +
-            "Calle: " + calle + "\n" +
-            "Colonia: " + colonia + "\n" +
-            "CP: " + cp + "\n" +
-            "Ciudad: " + ciudad + "\n" +
-            "País: " + pais + "\n" +
-            "Teléfono: " + telefono + "\n" +
-            "Email: " + email + "\n" +
-            "Categoría: " + categoria
-        );
+        return new Proveedor(nombre, calle, colonia, cp, ciudad, pais, telefono, email, categoria);
     } else {
         // Si no se encuentra el proveedor, mostrar un mensaje
         JOptionPane.showMessageDialog(null, "No se encontró el proveedor con el ID especificado.");

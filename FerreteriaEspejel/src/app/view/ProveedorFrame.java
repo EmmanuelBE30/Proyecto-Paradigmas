@@ -326,14 +326,19 @@ public class ProveedorFrame extends javax.swing.JFrame {
         int fila = TablaProveedor.getSelectedRow();
         int id  = Integer.parseInt(TablaProveedor.getValueAt(fila, 0).toString());
         
-       proveedor.consultarProveedor(id);
+       Proveedor consulta = proveedor.consultarProveedor(id);
        
        txtId.setText(String.valueOf(id));
        //Datos para llenar el formulario
-       txtNombreProv.setText(proveedor.getNombreProveedor());
-       
-      
-        
+       txtNombreProv.setText(consulta.getNombreProveedor());
+       txtCalleProv.setText(consulta.getCalleProveedor());
+       txtCiudadProv.setText(consulta.getCiudadProveedor());
+        txtColoniaProv.setText(consulta.getColoniaProveedor());
+        txtCpProv.setText(String.valueOf(consulta.getCpProveedor()));
+        jComboPaises.setSelectedItem(consulta.getPaisProveedor());
+        txtTelefonoProv.setText(consulta.getTelefonoProveedor());
+        txtEmailProv.setText(consulta.getEmailProveedor());
+        JcomboCat.setSelectedItem(consulta.getCategoriaProveedor());
     }//GEN-LAST:event_TablaProveedorMouseClicked
 
     /**

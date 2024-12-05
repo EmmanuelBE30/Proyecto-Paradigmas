@@ -284,13 +284,10 @@ public class ProductoFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarProdActionPerformed
-<<<<<<< HEAD
-        Producto prod = new Producto(txtNombreProd.getText(), txtDescripcionProd.getText(),
-                jComboCantidad.setValue(.getText()), Integer.parseInt(txtCostoPubProd.getText()),
-=======
+
         
-        Producto prod = new Producto(txtNombreProd.getText(), txtDescripcionProd.getText(), (int) jSpinnerCantidad.getValue(), Integer.parseInt(txtCostoPubProd.getText()),
->>>>>>> 7a4e1b3e350c1ca36cd9f8f7c2a5625d2da51192
+        Producto prod = new Producto(txtNombreProd.getText(), txtDescripcionProd.getText(), 
+                (int) jSpinnerCantidad.getValue(), Integer.parseInt(txtCostoPubProd.getText()),
                 Integer.parseInt(txtCostoProvProd.getText()), txtGarantiaProd.getText(),
                 jComboProveedor.getSelectedItem().toString(), jComboCat.getSelectedItem().toString());
 
