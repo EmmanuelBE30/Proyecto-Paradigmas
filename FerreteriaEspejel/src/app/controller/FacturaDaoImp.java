@@ -155,7 +155,7 @@ public void guardarFactura(Factura factura) {
             String productoFac = rs.getString("producto");
             BigDecimal totalFactura = rs.getBigDecimal("total"); // BigDecimal para valores monetarios
             String estadoFactura = rs.getString("estado");
-            String formaPago = rs.getString("forma_pago"); // Corrección del nombre
+            String formaPago = rs.getString("froma_pago"); // Corrección del nombre
             String descripcionFactura = rs.getString("descripcion");
             String categoria = rs.getString("categoria");
             int idCliente = rs.getInt("id_cliente");
