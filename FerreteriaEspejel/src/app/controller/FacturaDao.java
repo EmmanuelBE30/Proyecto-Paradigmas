@@ -12,8 +12,8 @@ import javax.swing.table.DefaultTableModel;
  * @author Vanesa
  */
 public interface FacturaDao {
-    public void guardarFactura(Factura producto);
-    public void actualizarFactura(Factura producto, int id);
+    public void guardarFactura(Factura factura);
+    public void actualizarFactura(Factura factura, int id);
     public Factura consultarFactura(int id);
     public void eliminarFactura(int id);
     public void construirTabla(DefaultTableModel modeloTabla);

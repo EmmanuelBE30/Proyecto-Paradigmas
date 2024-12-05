@@ -59,8 +59,53 @@ public class FacturaDaoImp implements FacturaDao {
     }
 
     @Override
-    public void actualizarFactura(Factura producto, int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void actualizarFactura(Factura factura, int id) {
+       try {
+            // Obtener la conexión a la base de datos
+            Connection con = Conexion.getConexion();
+
+            // Consulta SQL para actualizar los datos del producto
+            String query = "UPDATE facturas SET "
+                         + "sucursal = ?, "
+                         + "fecha_emision = ?, "
+                         + "producto = ?, "
+                         + "total = ?, "
+                         + "estado = ?, "
+                         + "forma_pago = ?, "
+                         + "descripcion = ?, "
+                         + "categoria = ?, "
+                         + "id_cliente = ?, "
+                         + "WHERE id_producto = ?";
+
+            // Preparar la consulta de actualización
+            PreparedStatement ps = con.prepareStatement(query);
+             ps.setString(1, factura.getSucursal());
+            ps.setString(2, factura.getFechaEmisionFactura());
+            ps.setString(3, factura.getProductoFac());
+            ps.setInt(4, factura.getTotalFactura());
+            ps.setString(5, factura.getEstadoFactura());
+            ps.setString(6, factura.getFormaPago());
+            ps.setString(7, factura.getDescripcionFactura());
+            ps.setString(8, factura.getCategoria());
+            ps.setString(9, factura.getClienteFactura());
+            ps.setInt(10, id); // Aquí pasamos el ID del producto a actualizar
+
+            // Ejecutar la consulta
+            ResultSet generatedKeys = ps.getGeneratedKeys();
+            int idProducto = 0;
+
+            if (generatedKeys.next()) {
+                idProducto = generatedKeys.getInt(1);
+                JOptionPane.showMessageDialog(null, "La factura se actualizo con éxito. ID: " + idProducto);
+            } else {
+                // Si no se genera un ID, mostrar un mensaje de error
+                JOptionPane.showMessageDialog(null, "Error al actualizar la factura");
+            }
+
+        } catch (SQLException e) {
+            // Manejo de excepciones SQL
+            System.out.println("Error al actualizar la factura: " + e);
+        } 
     }
 
     @Override
@@ -70,7 +115,30 @@ public class FacturaDaoImp implements FacturaDao {
 
     @Override
     public void eliminarFactura(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            Connection con = Conexion.getConexion();
+            String query = "DELETE FROM facturas WHERE id_facturas = ?";
+            PreparedStatement ps = con.prepareStatement(query);
+
+            // Establecer el parámetro de la consulta (ID del producto a eliminar)
+            ps.setInt(1, id);
+
+            // Ejecutar la consulta
+            ResultSet generatedKeys = ps.getGeneratedKeys();
+            int idFactura = 0;
+
+            if (generatedKeys.next()) {
+                idFactura = generatedKeys.getInt(1);
+                JOptionPane.showMessageDialog(null, "La factura se elimino con éxito. ID: " + idFactura);
+            } else {
+                // Si no se genera un ID, mostrar un mensaje de error
+                JOptionPane.showMessageDialog(null, "Error al eliminar la factura ");
+            }
+
+        } catch (SQLException e) {
+            // Manejo de excepciones SQL
+            System.out.println("Error al eliminar la factura: " + e);
+        }
     }
 
     @Override

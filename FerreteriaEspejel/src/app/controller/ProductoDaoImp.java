@@ -24,7 +24,7 @@ public class ProductoDaoImp implements ProductoDao {
     public void guardarProducto(Producto producto) {
         try {
             Connection con = Conexion.getConexion();
-            String query = "insert into productos(nombre,descripcion,cantidad,costo_publico,costo_producto,garantia,categoria,id_producto) values(?,?,?,?,?,?,?,?)";
+            String query = "insert into productos(nombre,descripcion,cantidad,costo_publico,costo_proveedor,garantia,categoria,id_proveedor) values(?,?,?,?,?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
             // Preparar la consulta para insertar en la tabla 'productoes'
             ps.setString(1, producto.getNombreProducto());

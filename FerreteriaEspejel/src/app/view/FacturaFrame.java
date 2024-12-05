@@ -4,6 +4,8 @@
  */
 package app.view;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Vanesa
@@ -73,6 +75,12 @@ public class FacturaFrame extends javax.swing.JFrame {
         jLabel8.setText("RFC");
 
         txtFechaEmision.setText("Formato de la fecha");
+
+        txtTotalFac.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTotalFacKeyTyped(evt);
+            }
+        });
 
         rbEfectivo.setText("Efectivo");
 
@@ -259,6 +267,15 @@ public class FacturaFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtTotalFacKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTotalFacKeyTyped
+        // TODO add your handling code here:
+        char c=evt.getKeyChar();
+        if(Character.isLetter(c)){
+            evt.consume();
+            JOptionPane.showMessageDialog(null,"solo numeros");
+        }
+    }//GEN-LAST:event_txtTotalFacKeyTyped
 
     /**
      * @param args the command line arguments

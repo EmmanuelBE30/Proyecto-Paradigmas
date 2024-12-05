@@ -88,23 +88,12 @@ public class ProveedorDaoImp implements ProveedorDao{
             ps.setInt(10, id); // Aquí pasamos el ID del proveedor a actualizar
 
             // Ejecutar la consulta
-            ResultSet generatedKeys = ps.getGeneratedKeys();
-
-            // Verificar si se actualizó algún registro
-           int idProveedor = 0;
-
-            if (generatedKeys.next()) {
-                idProveedor = generatedKeys.getInt(1);
-                JOptionPane.showMessageDialog(null, "El proveedor se actualizo con éxito. ID: " + idProveedor);
-            } else {
-                // Si no se genera un ID, mostrar un mensaje de error
-                JOptionPane.showMessageDialog(null, "Error al actualizar proveedor");
-            }
-        } catch (SQLException e) {
-            // Manejo de excepciones SQL
-            System.out.println("Error al actualizar proveedor: " + e);
-        }
+           ps.executeUpdate();
+           JOptionPane.showMessageDialog(null, "El proveedor se actualizo exitósamente ");
+    }catch(SQLException e){
+            System.out.println("Error al actualizar proveedor");
     }
+        }
 
     
 
@@ -117,28 +106,40 @@ public class ProveedorDaoImp implements ProveedorDao{
 
             // Establecer el parámetro de la consulta (ID del producto a eliminar)
             ps.setInt(1, id);
-
-            // Ejecutar la consulta
-            ResultSet generatedKeys = ps.getGeneratedKeys();
-            int idProveedor = 0;
-
-            if (generatedKeys.next()) {
-                idProveedor = generatedKeys.getInt(1);
-                JOptionPane.showMessageDialog(null, "El proveedor se elimino con éxito. ID: " + idProveedor);
-            } else {
-                // Si no se genera un ID, mostrar un mensaje de error
-                JOptionPane.showMessageDialog(null, "Error al eliminar proveedor");
-            }
-
-        } catch (SQLException e) {
+            ps.executeUpdate();// Ejecutar la consulta
+            
+            JOptionPane.showMessageDialog(null, "El EMPLEADO se elimino exitósamente");
+            
+                } catch (SQLException e) {
             // Manejo de excepciones SQL
             System.out.println("Error al eliminar proveedor: " + e);
         }
-    }
+    } 
+            
+
+       
 
     @Override
     public void construirTabla(DefaultTableModel modeloTabla) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try{
+            Connection conn = Conexion.getConexion();
+            String query = "Select id_proveedor,nombre,calle,colonia,CP,ciudad,pais,telefono,email,categoria from proveedores";
+            PreparedStatement ps=conn.prepareStatement(query);
+            ResultSet rs= ps.executeQuery();
+            
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columns = rsmd.getColumnCount();
+            
+            while(rs.next()){
+                Object[] fila=new Object[columns];
+                for(int indice=0; indice<columns; indice++){
+                    fila[indice]=rs.getObject(indice + 1);
+                }
+                modeloTabla.addRow(fila);
+            }
+        }catch(SQLException e){
+            System.out.println("Error al construir tabla");
+        }
     }
 
     @Override
