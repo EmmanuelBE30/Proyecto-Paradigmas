@@ -6,6 +6,7 @@ package app.view;
 
 import app.controller.FacturaDaoImp;
 import app.model.Factura;
+import java.math.BigDecimal;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -44,7 +45,26 @@ public class FacturaFrame extends javax.swing.JFrame {
         
         factura.construirTabla(modeloTabla);
     }
-    
+    public Factura recogerDatosFormulario() {
+        String sucursal = jComboSucursal.getSelectedItem().toString();
+        String fechaEmision = txtFechaEmision.getText();
+        String producto = txtProductoFac.getText();
+        BigDecimal total = new BigDecimal(txtTotalFac.getText());
+        String estado = jComboEstado.getSelectedItem().toString();
+        String formaPago = rbEfectivo.isSelected() ? "Efectivo" : "Tarjeta";
+        String descripcion = txtDescripcionFac.getText();
+        String rfc = txtRfcFac.getText();
+        String categoria = txtCategoriaFac.getText();
+        String cliente = txtClienteFac.getText();
+
+    return new Factura(sucursal, fechaEmision, producto, total, estado, formaPago, descripcion, rfc, categoria, cliente);
+    }
+    public Factura recogerDatosParaActualizar() {
+    int id = Integer.parseInt(txtId.getText()); // Convertir ID a entero
+    Factura factura = recogerDatosFormulario();
+    factura.setId_factura(id); // Método adicional para manejar el ID si no está en constructor.
+    return factura;
+    }
     public void limpiarFactura(){
         txtFechaEmision.setText("");
         txtProductoFac.setText("");
@@ -381,39 +401,15 @@ public class FacturaFrame extends javax.swing.JFrame {
 
     private void btnGuardarFacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarFacActionPerformed
         // TODO add your handling code here:
-        String formaPago = "Efectivo";
-           if(rbEfectivo.isSelected() == true){
-               formaPago = "Efectivo";
-           }else if(rbTarjeta.isSelected() == true){
-                formaPago = "Tarjeta";
-           }
         
-        Factura fact = new Factura(jComboSucursal.getSelectedItem().toString(), txtFechaEmision.getText(), 
-                txtProductoFac.getText(), Integer.parseInt(txtTotalFac.getText()),
-               jComboEstado.getSelectedItem().toString(),formaPago, txtDescripcionFac.getText(),
-                txtRfcFac.getText(),txtCategoriaFac.getText(),txtClienteFac.getText());
-
-            
-        factura.guardarFactura(fact);
+        factura.guardarFactura(recogerDatosFormulario());
         cargarTabla();
         
     }//GEN-LAST:event_btnGuardarFacActionPerformed
 
     private void btnModificarFacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarFacActionPerformed
-        // TODO add your handling code here:
-        String formaPago = "Efectivo";
-           if(rbEfectivo.isSelected() == true){
-               formaPago = "Efectivo";
-           }else if(rbTarjeta.isSelected() == true){
-                formaPago = "Tarjeta";
-           }
-        
-        Factura fact = new Factura(jComboSucursal.getSelectedItem().toString(), txtFechaEmision.getText(), 
-                txtProductoFac.getText(), Integer.parseInt(txtTotalFac.getText()),
-               jComboEstado.getSelectedItem().toString(),formaPago, txtDescripcionFac.getText(),
-                txtRfcFac.getText(),txtCategoriaFac.getText(),txtClienteFac.getText());
-        
-        factura.actualizarFactura(fact, Integer.parseInt(txtId.getText()));
+
+        factura.actualizarFactura(recogerDatosParaActualizar());
     }//GEN-LAST:event_btnModificarFacActionPerformed
 
     private void btnEliminarFacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarFacActionPerformed

@@ -4,6 +4,8 @@
  */
 package app.model;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author Vanesa
@@ -12,15 +14,16 @@ public class Factura {
     private String sucursal;
     private String fechaEmisionFactura;
     private String productoFac;
-    private int totalFactura;
+    private BigDecimal totalFactura;
     private String estadoFactura;
     private String formaPago;
     private String descripcionFactura;
     private String rfcCli;
     private String categoria;
     private String clienteFactura;
+    private int id_factura;
 
-    public Factura(String sucursal, String fechaEmisionFactura, String productoFac, int totalFactura, String estadoFactura, String formaPago, String descripcionFactura, String rfcCli, String categoria, String clienteFactura) {
+    public Factura(String sucursal, String fechaEmisionFactura, String productoFac, BigDecimal totalFactura, String estadoFactura, String formaPago, String descripcionFactura, String rfcCli, String categoria, String clienteFactura) {
         this.sucursal = sucursal;
         this.fechaEmisionFactura = fechaEmisionFactura;
         this.productoFac = productoFac;
@@ -32,6 +35,7 @@ public class Factura {
         this.categoria = categoria;
         this.clienteFactura = clienteFactura;
     }
+    
 
     public String getSucursal() {
         return sucursal;
@@ -53,15 +57,24 @@ public class Factura {
         return productoFac;
     }
 
+    public int getId_factura() {
+        return id_factura;
+    }
+
+    public void setId_factura(int id_factura) {
+        this.id_factura = id_factura;
+    }
+    
+    
     public void setProductoFac(String productoFac) {
         this.productoFac = productoFac;
     }
 
-    public int getTotalFactura() {
+    public BigDecimal getTotalFactura() {
         return totalFactura;
     }
 
-    public void setTotalFactura(int totalFactura) {
+    public void setTotalFactura(BigDecimal totalFactura) {
         this.totalFactura = totalFactura;
     }
 

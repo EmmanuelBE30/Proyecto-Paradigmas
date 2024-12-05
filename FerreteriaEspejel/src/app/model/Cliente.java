@@ -12,6 +12,7 @@ public class Cliente extends Persona {
     
     private int noCliente;
     private int id;
+    private String rfc;
      
     
 
@@ -23,6 +24,14 @@ public class Cliente extends Persona {
     public Cliente(){
         
     }  
+
+    public void setRfc(String rfc) {
+        this.rfc = rfc;
+    }
+
+    public String getRfc() {
+        return rfc;
+    }
 
     public int getId() {
         return id;
