@@ -204,20 +204,22 @@ public void guardarFactura(Factura factura) {
           try{
             Connection conn = Conexion.getConexion();
             String query = "SELECT \n" +
-            "    f.id_factura AS \"ID Factura\",\n" +
-            "    f.sucursal AS \"Sucursal\",\n" +
-            "    f.fecha_emision AS \"Fecha de Emisión\",\n" +
-            "    f.producto AS \"Producto\",\n" +
-            "    f.total AS \"Total\",\n" +
-            "    f.estado AS \"Estado\",\n" +
-            "    f.froma_pago AS \"Forma de Pago\",\n" +
-            "    f.descripcion AS \"Descripcion\",\n" +
-            "    f.categoria AS \"Categoría\",\n" +
-            "    c.rfc AS \"RFC\"\n" +
-            "FROM \n" +
-            "    facturas f\n" +
-            "JOIN \n" +
-            "    clientes c ON f.id_cliente = c.id_persona;";
+                "    f.id_factura AS \"ID Factura\",\n" +
+                "    f.sucursal AS \"Sucursal\",\n" +
+                "    f.fecha_emision AS \"Fecha de Emisión\",\n" +
+                "    f.producto AS \"Producto\",\n" +
+                "    f.total AS \"Total\",\n" +
+                "    f.estado AS \"Estado\",\n" +
+                "    f.froma_pago AS \"Forma de Pago\",\n" +
+                "    f.descripcion AS \"Descripcion\",\n" +
+                "    f.categoria AS \"Categoría\",\n" +
+                "    p.rfc AS \"RFC\" -- Obtener el RFC del cliente desde la tabla 'personas'\n" +
+                "FROM \n" +
+                "    facturas f\n" +
+                "JOIN \n" +
+                "    clientes c ON f.id_cliente = c.id_persona\n" +
+                "JOIN \n" +
+                "    personas p ON c.id_persona = p.id_persona;";
             PreparedStatement ps=conn.prepareStatement(query);
             ResultSet rs= ps.executeQuery();
             
