@@ -5,6 +5,7 @@
 package app.controller;
 
 import app.model.Producto;
+import app.model.Proveedor;
 import app.utils.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,6 +28,8 @@ public class ProductoDaoImp implements ProductoDao {
             Connection con = Conexion.getConexion();
             String query = "insert into productos(nombre,descripcion,cantidad,costo_publico,costo_proveedor,garantia,categoria,id_proveedor) values(?,?,?,?,?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+            Proveedor id = new Proveedor();
+            id = new ProveedorDaoImp().obtenerIdProveedor(producto.getProveedorProducto());
             // Preparar la consulta para insertar en la tabla 'productoes'
             ps.setString(1, producto.getNombreProducto());
             ps.setString(2, producto.getDescripcionProducto());
@@ -35,7 +38,7 @@ public class ProductoDaoImp implements ProductoDao {
             ps.setInt(5, producto.getCostoProvProducto());
             ps.setString(6, producto.getGarantiaProducto());
             ps.setString(7, producto.getCategoriaProducto());
-            ps.setString(8, producto.getProveedorProducto());
+            ps.setInt(8, id.getId_proveedor());
           
             // Ejecutar la consulta
             ps.executeUpdate();

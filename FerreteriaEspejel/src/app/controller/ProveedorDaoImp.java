@@ -189,18 +189,18 @@ public class ProveedorDaoImp implements ProveedorDao{
     } 
 
     @Override
-    public Proveedor obtenerIdProveedor(Proveedor nombreProveedor) {
+    public Proveedor obtenerIdProveedor(String nombreProveedor) {
          try{
             Connection con = Conexion.getConexion();
             String query = "select id_proveedor from proveedores where nombre = ?";
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1, nombreProveedor.getNombreProveedor());
+            ps.setString(1, nombreProveedor);
             ResultSet rs = ps.executeQuery();
-            
+            Proveedor id = new Proveedor();
             if(rs.next()){
-                nombreProveedor.setId_proveedor(rs.getInt("id_proveedor"));
+                id.setId_proveedor(rs.getInt("id_proveedor"));
               }
-            return nombreProveedor;
+            return id;
               }catch(SQLException e){
             e.printStackTrace();
         }
